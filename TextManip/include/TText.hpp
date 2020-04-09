@@ -6,26 +6,26 @@
 
 class TLink;
 class TText;
-/*
+
 struct TMem
 {
 	TLink* pFirst;
 	TLink* pFree;
 	TLink* pLast;
-};*/
+};
 
 class TLink
 {
 public:
 	TLink* pNext, * pDown;
 	char str[80];
-	//bool is_free;
+	bool is_free;
 	
-	//static TMem mem;
+	static TMem mem;
 
 	TLink(const char* _str = NULL, TLink* _pNext = NULL, TLink* _pDown = NULL);
 	~TLink() {};
-	/*
+	
 	void* operator new(size_t s);
 	void operator delete(void* p);
 
@@ -34,7 +34,7 @@ public:
 
 	static void print_free();
 	void set_str(std::string _str = "\0");
-	*/
+	
 };
 
 
@@ -75,5 +75,5 @@ public:
 	bool go_next();
 	bool reset();
 
-	//void set_not_free();
+	void set_not_free();
 };

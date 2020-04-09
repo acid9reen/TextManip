@@ -6,8 +6,13 @@ void clrscr(void);
 void clreol(void);
 void gotoxy(int x, int y);
 
+TMem TLink::mem;
+constexpr int LINK_COUNT { 100 };
+
 int main()
 {
+	TLink::init_mem(LINK_COUNT);
+
 	TText text = TText();
 	char option;
 

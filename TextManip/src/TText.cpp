@@ -17,7 +17,7 @@ TLink::TLink(const char* _str, TLink* _pNext,
 		strncpy_s(str, _str, 80);
 	}
 }
-/*
+
 void* TLink::operator new(size_t s) {
 	TLink* tmp = mem.pFree;
 
@@ -92,13 +92,13 @@ void TLink::print_free() {
 	std::cout << i++ << ") ";
 	mem.pLast->str[0] != '\0' ? std::cout << mem.pLast->str << std::endl : std::cout << "\"Empty\"" << std::endl;
 
-	//cout << "\nCount of free links: " << i << endl;
+	std::cout << "\nCount of free links: " << i << std::endl;
 }
 
 void TLink::set_str(std::string _str) {
 	strcpy_s(str, _str.c_str());
 }
-*/
+
 /*********************************************************************************************/
 
 TText::TText()
@@ -354,8 +354,8 @@ bool TText::reset()
 
 	return is_end();
 }
-/*
+
 void TText::set_not_free()
 {
 	pCurr->is_free = false;
-}*/
+}
