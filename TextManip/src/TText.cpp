@@ -2,8 +2,7 @@
 #include "TText.hpp"
 
 
-TLink::TLink(const char* _str, TLink* _pNext,
-	TLink* _pDown)
+TLink::TLink(const char* _str, TLink* _pNext, TLink* _pDown)
 {
 	pNext = _pNext;
 	pDown = _pDown;
@@ -14,7 +13,7 @@ TLink::TLink(const char* _str, TLink* _pNext,
 	}
 	else
 	{
-		strncpy_s(str, _str, 80);
+		strcpy_s(str, _str);
 	}
 }
 
@@ -163,6 +162,11 @@ std::string TText::get_line()
 		throw - 1;
 
 	return std::string(pCurr->str);
+}
+
+TLink* TText::get_pFirst()
+{
+	return pFirst;
 }
 
 void TText::ins_next_line(std::string _str)

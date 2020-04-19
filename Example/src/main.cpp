@@ -15,35 +15,59 @@ int main()
 
 	TText text = TText();
 	char option;
-
-	std::string fn = "C:\\Users\\smirn\\source\\repos\\text_manip\\TextManip\\src\\Color.cpp";
+	std::string buf;
+	bool read_flag{ false };
+	std::string fn{ "C:\\Users\\smirn\\source\\repos\\text_manip\\TextManip\\src\\Color.cpp" };
 
 	while (true) {
-		SetColor(ConsoleColor::LightGreen, ConsoleColor::Black);
-		std::cout << "user: ";
+		SetColor(ConsoleColor::LightCyan, ConsoleColor::Black);
+		std::cout << "$ ";
 		SetColor(ConsoleColor::LightGray, ConsoleColor::Black);
 		option = _getch();
 		std::cout << option << std::endl;
 
 		switch (option) {
-		case 'i': std::cout << "r - read\np - print\ns - save\nc - copy\nq - quit\ne - clear\na - go to previous link\nz - go to next link\nx - " <<
-			"go to down link\n1 - insert next line\n2 - insert next section\n3 - insert down line\n4 - insert down section\n" <<
-			"5 - delete next link\n6 - delete down link\n"; break;
-		case 'r': text.read(fn); break;
-		case 'p': text.print(); break;
-		//case 's': text.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text\\SavedText.txt"); break;
-			//case 'c': TText tmp(text.Copy()); tmp.Save("C:\\Users\\User\\Documents\\GitHub projects\\Lab6-Text\\Copy.txt"); break;
+		case 'i': std::cout << "r - read\np - print\ns - save\nq - quit\ne - clear\nf - print free\nd - clear memory\n" <<
+			"a - go to previous link\nz - go to next link\nx - go to down link\n1 - insert next line\n2 - insert next section\n" <<
+			"3 - insert down line\n4 - insert down section\n5 - delete next link\n6 - delete down link\n"; break;
+		case 'r': text.read(fn); 
+				  if (text.get_pFirst() == NULL) 
+				  { 
+					  std::cout << "Reading error\n"; 
+				  }
+				  else 
+				  {		
+					  read_flag = true; 
+					  std::cout << "Successful reading\n"; 
+				  };
+				  break;
+		case 'p': TLink::clear_mem(text); 
+				  clrscr(); text.print();
+				  break;
+		case 'd': if(read_flag) 
+				  { 
+				  	  TLink::clear_mem(text); 
+					  std::cout << "Memory was cleared\n";
+				  }
+				  else 
+				  std::cout << "There is nothing to clear\n"; 
+				  break;
+		case 's': text.write("Saved_text.txt"); break;
 		case 'e': clrscr(); std::cout << "i - info\n"; break;
-		case 'q': exit(0);
-		case 'a': text.go_prev_link(); text.print(); break;
-		case 'z': text.go_next_link(); text.print(); break;
-		case 'x': text.go_down_link(); text.print(); break;
-		//case '1': std::cout << "Enter your line: "; std::cin >> buf; text.InsNextLine(buf); text.print(); break;
-		//case '2': std::cout << "Enter your line: "; std::cin >> buf; text.InsNextSection(buf); text.print(); break;
-		//case '3': cout << "Enter your line: "; cin >> buf; text.InsDownLine(buf); text.print(); break;
-		//case '4': cout << "Enter your line: "; cin >> buf; text.InsDownSection(buf); text.print(); break;
-		case '5': text.del_next(); text.print(); break;
-		case '6': text.del_down(); text.print(); break;
+		case 'f': TLink::print_free();
+				  break;
+		case 'q': if (read_flag) 
+					  TLink::clear_mem(text);
+				  exit(0);
+		case 'a': text.go_prev_link(); clrscr(); text.print(); break;
+		case 'z': text.go_next_link(); clrscr(); text.print(); break;
+		case 'x': text.go_down_link(); clrscr(); text.print(); break;
+		case '1': std::cout << "Enter your line: "; std::getline(std::cin, buf); text.ins_next_line(buf); clrscr(); text.print(); break;
+		case '2': std::cout << "Enter your line: "; std::getline(std::cin, buf); text.ins_next_section(buf); clrscr(); text.print(); break;
+		case '3': std::cout << "Enter your line: "; std::getline(std::cin, buf); text.ins_down_line(buf); clrscr(); text.print(); break;
+		case '4': std::cout << "Enter your line: "; std::getline(std::cin, buf); text.ins_down_section(buf); clrscr(); text.print(); break;
+		case '5': text.del_next(); clrscr(); text.print(); break;
+		case '6': text.del_down(); clrscr(); text.print(); break;
 		default: std::cout << "Input error\n";
 		}
 	}

@@ -53,6 +53,7 @@ public:
 
 	void set_line(std::string _str);
 	std::string get_line();
+	TLink* get_pFirst();
 
 	void ins_next_line(std::string _str);
 	void ins_down_line(std::string _str);
